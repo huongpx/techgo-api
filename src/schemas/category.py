@@ -2,8 +2,15 @@ from pydantic import BaseModel
 
 
 class CategoryBase(BaseModel):
-    id: int | None
-    name: str | None
+    name: str
+
+
+class CategoryCreate(CategoryBase):
+    pass
+
+
+class CategoryUpdate(CategoryBase):
+    pass
 
 
 class Category(CategoryBase):
@@ -12,11 +19,3 @@ class Category(CategoryBase):
 
     class Config:
         orm_mode = True
-
-
-class AdminCategoryCreate(CategoryBase):
-    name: str
-
-
-class AdminCategoryUpdate(CategoryBase):
-    name: str

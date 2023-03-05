@@ -30,6 +30,14 @@ class ProductBase(BaseModel):
     description: str | None
 
 
+class CategoryCreate(CategoryBase):
+    pass
+
+
+class CategoryUpdate(CategoryBase):
+    pass
+
+
 class Product(ProductBase):
     id: int
     name: str

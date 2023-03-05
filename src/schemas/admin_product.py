@@ -8,7 +8,7 @@ from schemas.product import (
 )
 
 
-class AdminCategoryCreate(CategoryBase):
+class CategoryCreate(CategoryBase):
     pass
 
 

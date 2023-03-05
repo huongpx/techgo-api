@@ -1,9 +1,9 @@
 from crud.base import CRUDBase
-from schemas import AdminCategoryCreate, AdminCategoryUpdate
+from schemas import CategoryCreate, CategoryUpdate
 from models.product import Category
 
 
-class CRUDCategory(CRUDBase[Category, AdminCategoryCreate, AdminCategoryUpdate]):
+class CRUDCategory(CRUDBase[Category, CategoryCreate, CategoryUpdate]):
     pass
 
 

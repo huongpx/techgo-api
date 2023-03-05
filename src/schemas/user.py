@@ -6,43 +6,29 @@ class UserBase(BaseModel):
 
     firstname: str | None
     lastname: str | None
-    email: EmailStr
+    email: EmailStr | None
     phone_number: str | None
     address: str | None
     gender: int | None
+    is_admin: bool | None
+    is_staff: bool | None
 
 
 class UserCreate(UserBase):
     """Props received via API on create"""
 
+    email: EmailStr
     password: str
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "email": "mail@example.com",
-                "password": "strong1password",
-                "gender": 1,
-            }
-        }
 
-
-class UserUpdate:
+class UserUpdate(UserBase):
     """Props received via API on update"""
 
-    firstname: str | None
-    lastname: str | None
-    email: EmailStr | None
-    phone_number: str | None
-    address: str | None
-    gender: int | None
     password: str | None
 
 
 class UserInDBBase(UserBase):
     id: int | None
-    is_admin: bool
-    is_staff: bool
 
     class Config:
         orm_mode = True

@@ -28,7 +28,7 @@ async def read_categories(*, db: Session = Depends(get_db)):
     response_model=schemas.Category,
 )
 async def create_category(
-    *, db: Session = Depends(get_db), category_in: schemas.AdminCategoryCreate
+    *, db: Session = Depends(get_db), category_in: schemas.CategoryCreate
 ):
     category = crud.category.create(db=db, obj_in=category_in)
     return category
@@ -50,7 +50,7 @@ async def read_category(*, db: Session = Depends(get_db), id: int):
     response_model=schemas.Category,
 )
 async def update_category(
-    *, db: Session = Depends(get_db), id: int, category_in: schemas.AdminCategoryUpdate
+    *, db: Session = Depends(get_db), id: int, category_in: schemas.CategoryUpdate
 ):
     category = crud.category.get(db=db, id=id)
     if not category:

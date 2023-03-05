@@ -29,6 +29,9 @@ class Product(Base):
 
     category: Mapped["Category"] = relationship(back_populates="products")
     brand: Mapped["Brand"] = relationship(back_populates="products")
+    product_variants: Mapped[list["ProductVariant"]] = relationship(
+        back_populates="product"
+    )
 
     def __repr__(self) -> str:
         return self.name

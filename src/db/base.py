@@ -3,5 +3,5 @@
 # https://stackoverflow.com/questions/15660676/alembic-autogenerate-producing-empty-migration
 from db.base_model import Base
 
-# from models.user import *
+from models.user import *
 from models.product import *

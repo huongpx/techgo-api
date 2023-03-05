@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from sqladmin import Admin, ModelView
 
 from apis import login, users, products, admin_categories
 from db.session import engine
