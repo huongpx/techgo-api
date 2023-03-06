@@ -1,26 +1,7 @@
 from pydantic import BaseModel
 
-
-class CategoryBase(BaseModel):
-    name: str
-
-
-class Category(CategoryBase):
-    id: int
-
-    class Config:
-        orm_mode = True
-
-
-class BrandBase(BaseModel):
-    name: str
-
-
-class Brand(BrandBase):
-    id: int
-
-    class Config:
-        orm_mode = True
+from schemas.category import Category
+from schemas.brand import Brand
 
 
 class ProductBase(BaseModel):
@@ -30,19 +11,22 @@ class ProductBase(BaseModel):
     description: str | None
 
 
-class CategoryCreate(CategoryBase):
-    pass
-
-
-class CategoryUpdate(CategoryBase):
-    pass
-
-
-class Product(ProductBase):
-    id: int
+class ProductCreate(ProductBase):
     name: str
     category_id: int
     brand_id: int
+    description: str
+
+
+class ProductUpdate(ProductBase):
+    pass
+
+
+class Product(BaseModel):
+    id: int
+    name: str
+    category: Category
+    brand: Brand
     description: str
 
     class Config:

@@ -6,8 +6,8 @@ import crud
 import schemas
 
 router = APIRouter(
-    prefix="/admin/categories",
-    tags=["Admin Category"],
+    prefix="/categories",
+    tags=["category"],
     dependencies=[Depends(get_current_admin)],
 )
 

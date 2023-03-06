@@ -39,12 +39,60 @@ async def read_products(
     return products
 
 
+@router.post(
+    "/",
+    response_model=schemas.Product,
+    dependencies=[Depends(get_current_admin)],
+    summary="Tạo sản phẩm mới (chỉ admin)",
+)
+async def create_product(
+    *,
+    db: Session = Depends(get_db),
+    obj_in: schemas.ProductCreate,
+):
+    item = crud.product.create(db=db, obj_in=obj_in)
+    return item
+
+
 @router.get(
     "/{id}",
     response_model=schemas.Product,
-    dependencies=[Depends(get_current_admin)],
     summary="Xem sản phẩm",
 )
 async def read_product(*, db: Session = Depends(get_db), id: int):
     product = crud.product.get(db=db, id=id)
+    return product
+
+
+@router.put(
+    "/{id}",
+    response_model=schemas.Product,
+    dependencies=[Depends(get_current_admin)],
+    summary="Sửa sản phẩm (chỉ admin)",
+)
+async def update_product(
+    *, db: Session = Depends(get_db), id: int, product_in: schemas.ProductUpdate
+):
+    product = crud.product.get(db=db, id=id)
+    if not product:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found"
+        )
+    product = crud.product.update(db=db, db_obj=product, obj_in=product_in)
+    return product
+
+
+@router.delete(
+    "/{id}",
+    response_model=schemas.Product,
+    dependencies=[Depends(get_current_admin)],
+    summary="Xóa sản phẩm (chỉ admin)",
+)
+async def delete_product(*, db: Session = Depends(get_db), id: int):
+    product = crud.product.get(db=db, id=id)
+    if not product:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found"
+        )
+    product = crud.product.remove(db=db, db_obj=product)
     return product

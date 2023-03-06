@@ -5,10 +5,10 @@ from sqlalchemy.orm import Session
 
 from crud.base import CRUDBase
 from models.product import Brand, Category, Discount, Product, ProductVariant
-from schemas import AdminProductCreate, AdminProductUpdate
+from schemas import ProductCreate, ProductUpdate
 
 
-class CRUDProduct(CRUDBase[Product, AdminProductCreate, AdminProductUpdate]):
+class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
     def get_multi_filter(
         self,
         db: Session,
@@ -19,12 +19,12 @@ class CRUDProduct(CRUDBase[Product, AdminProductCreate, AdminProductUpdate]):
         limit: int = 10,
     ) -> Sequence[Product]:
         stmt = select(Product)
-        if category_id is not None:
+        if category_id:
             stmt = stmt.where(Product.category_id == category_id)
-        if brand_id is not None:
+        if brand_id:
             stmt = stmt.where(Product.brand_id == brand_id)
-        if brand_id is not None:
-            stmt = stmt.where(Product.name.ilike(keyword))
+        if keyword:
+            stmt = stmt.where(Product.name.icontains(keyword))
         stmt = stmt.offset(skip).limit(limit)
         items = db.scalars(stmt).all()
         return items

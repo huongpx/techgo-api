@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 
-from apis import login, users, products, admin_categories
-from db.session import engine
-from models.product import Category, Product, ProductVariant
-from models.user import User
+from apis import brands, categories, discounts, login, products, users
 
 app = FastAPI()
 
 app.include_router(users.router)
 app.include_router(login.router)
 app.include_router(products.router)
-app.include_router(admin_categories.router)
+app.include_router(categories.router)
+app.include_router(brands.router)
+app.include_router(brands.router)
+app.include_router(discounts.router)
