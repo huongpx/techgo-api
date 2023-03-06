@@ -9,9 +9,9 @@ class UserBase(BaseModel):
     email: EmailStr | None
     phone_number: str | None
     address: str | None
-    gender: int | None
-    is_admin: bool | None
-    is_staff: bool | None
+    gender: int | None = 0
+    is_admin: bool | None = False
+    is_staff: bool | None = False
 
 
 class UserCreate(UserBase):
