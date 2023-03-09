@@ -1,15 +1,13 @@
-from fastapi import APIRouter, Depends, Body, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Body, Depends, HTTPException
 from pydantic import EmailStr
-from utils.validate import password_strong
+from sqlalchemy.orm import Session
 
-from models.user import User
-import schemas
 import crud
+import schemas
 from apis.deps import get_current_user, get_db
-
-# 0: unknown, 1: male, 2: female, 9: not applicable
-GENDER_CHOICES = [0, 1, 2, 9]
+from models.user import User
+from utils.constants import GENDER_CHOICES
+from utils.validate import password_strong
 
 router = APIRouter(
     prefix="/users",
