@@ -10,7 +10,7 @@ services:
     env_file:
       - docker-compose.env
     volumes:
-      - ./src:/app/
+      - images:/app/media
 
   db:
     image: postgres:11-alpine
@@ -21,15 +21,6 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  pgadmin:
-    image: dpage/pgadmin4:6.20
-    restart: always
-    env_file:
-      - docker-compose.env
-    ports:
-      - "8080:80"
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
 volumes:
   db-data:
-  pgadmin-data:
+  images:
