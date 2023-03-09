@@ -43,17 +43,27 @@ class ProductVariant(Base):
     sku: Mapped[str] = mapped_column(String(255))
     price: Mapped[int]
     inventory: Mapped[int]
-    discount_id: Mapped[int] = mapped_column(ForeignKey("discount.id"))
 
     product: Mapped["Product"] = relationship(back_populates="product_variants")
     discount: Mapped["Discount"] = relationship(back_populates="product_variant")
+    images: Mapped[list["ProductVariantImage"]] = relationship(
+        back_populates="product_variant"
+    )
 
     def __repr__(self) -> str:
         return self.name
 
 
 class Discount(Base):
+    product_variant_id: Mapped[int] = mapped_column(ForeignKey("product_variant.id"))
     name: Mapped[str] = mapped_column(String(255))
     discount_percent: Mapped[int]
 
     product_variant: Mapped["ProductVariant"] = relationship(back_populates="discount")
+
+
+class ProductVariantImage(Base):
+    product_variant_id: Mapped[int] = mapped_column(ForeignKey("product_variant.id"))
+    image_path: Mapped[str]
+
+    product_variant: Mapped["ProductVariant"] = relationship(back_populates="images")
