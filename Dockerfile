@@ -9,4 +9,4 @@ COPY . .
 
 RUN mkdir -p media/product_images
 
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0" ]
+CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--reload" ]
