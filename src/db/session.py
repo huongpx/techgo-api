@@ -1,5 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-engine = create_engine("postgresql://admin:admin@db:5432/techgo")
+from core.config import settings
+
+engine = create_engine(
+    settings.SQLALCHEMY_DATABASE_URI, pool_pre_ping=True  # type: ignore
+)
 DBSession = Session(bind=engine, autoflush=False, autocommit=False)
