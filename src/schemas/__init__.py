@@ -1,4 +1,5 @@
 from .brand import Brand, BrandCreate, BrandUpdate
+from .cart import CartItem, CartItemCreate, CartItemUpdate
 from .category import Category, CategoryCreate, CategoryUpdate
 from .discount import Discount, DiscountCreate, DiscountUpdate
 from .login import Token

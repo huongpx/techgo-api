@@ -17,6 +17,7 @@ services:
       - ./src/models:/app/models
       - ./src/schemas:/app/schemas
       - ./src/utils:/app/utils
+      - ./src/alembic:/app/alembic
 
   db:
     image: postgres:11-alpine

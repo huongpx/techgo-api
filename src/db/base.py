@@ -2,6 +2,13 @@
 # and auto generate migration
 # https://stackoverflow.com/questions/15660676/alembic-autogenerate-producing-empty-migration
 from db.base_model import Base
-
-from models.user import *
-from models.product import *
+from models.cart import CartItem, ShoppingSession
+from models.product import (
+    Brand,
+    Category,
+    Discount,
+    Product,
+    ProductVariant,
+    ProductVariantImage,
+)
+from models.user import User

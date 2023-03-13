@@ -1,6 +1,11 @@
+import typing
+
 from sqlalchemy import String, ForeignKey, Table, Column
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from db.base_model import Base
+
+if typing.TYPE_CHECKING:
+    from models.cart import CartItem
 
 
 class Category(Base):
@@ -47,6 +52,9 @@ class ProductVariant(Base):
     product: Mapped["Product"] = relationship(back_populates="product_variants")
     discount: Mapped["Discount"] = relationship(back_populates="product_variant")
     images: Mapped[list["ProductVariantImage"]] = relationship(
+        back_populates="product_variant"
+    )
+    cart_items: Mapped[list["CartItem"]] = relationship(
         back_populates="product_variant"
     )
 

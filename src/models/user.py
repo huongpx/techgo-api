@@ -1,7 +1,12 @@
+import typing
+
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db.base_model import Base
+
+if typing.TYPE_CHECKING:
+    from models.cart import ShoppingSession
 
 
 class User(Base):
@@ -14,3 +19,5 @@ class User(Base):
     gender: Mapped[int] = mapped_column(nullable=True)
     is_admin: Mapped[bool] = mapped_column(default=False)
     is_staff: Mapped[bool] = mapped_column(default=False)
+
+    shopping_session: Mapped["ShoppingSession"] = relationship(back_populates="user")
