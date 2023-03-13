@@ -50,12 +50,9 @@ async def update_item(
     item = crud.cart_item.get(db=db, id=item_id)
     if not item:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="discount not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="item not found"
         )
     item = crud.cart_item.update(db=db, db_obj=item, obj_in=item_in)
-    db.add(item)
-    db.commit()
-    db.refresh(item)
     return item
 
 
@@ -69,10 +66,7 @@ async def delete_item(
     item = crud.cart_item.get(db=db, id=item_id)
     if not item:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="discount not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="item not found"
         )
     item = crud.cart_item.remove(db=db, db_obj=item)
-    db.add(item)
-    db.commit()
-    db.refresh(item)
     return item

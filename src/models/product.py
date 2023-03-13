@@ -6,6 +6,7 @@ from db.base_model import Base
 
 if typing.TYPE_CHECKING:
     from models.cart import CartItem
+    from models.order import OrderItem
 
 
 class Category(Base):
@@ -55,6 +56,9 @@ class ProductVariant(Base):
         back_populates="product_variant"
     )
     cart_items: Mapped[list["CartItem"]] = relationship(
+        back_populates="product_variant"
+    )
+    order_items: Mapped[list["OrderItem"]] = relationship(
         back_populates="product_variant"
     )
 
