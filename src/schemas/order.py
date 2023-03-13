@@ -38,8 +38,8 @@ class OrderCreate(OrderBase):
     pass
 
 
-class OrderUpdate(OrderBase):
-    pass
+class OrderUpdate(BaseModel):
+    status: int | None
 
 
 class Order(OrderBase):
